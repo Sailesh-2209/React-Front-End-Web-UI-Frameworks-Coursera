@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Home from './HomeComponent';
 import Menu from './MenuComponent';
 import Contact from './ContactComponent';
+import About from './AboutComponent';
 import { DISHES } from '../shared/dishes';
 import Dishdetail from './DishdetailComponent';
 import Header from './headerComponent.js';
@@ -39,7 +40,7 @@ class Main extends Component {
           <Dishdetail selectedDish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]} comments={this.state.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))}/>
         );
       };
-          
+
       return (
       <div>
         <Header />
@@ -48,6 +49,7 @@ class Main extends Component {
           <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes} />} />
           <Route path="/menu/:dishId" component={DishWithId} />
           <Route exact path="/contactus" component={Contact} />
+          <Route path="/aboutus" component={() => <About leaders={this.state.leaders} />} />
           <Redirect to="/home" />
         </Switch>
         <Footer />
