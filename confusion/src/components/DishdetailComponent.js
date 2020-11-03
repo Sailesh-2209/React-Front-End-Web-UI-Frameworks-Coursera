@@ -2,8 +2,9 @@ import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from './CommentForm';
+import { Loading } from './LoadingComponent';
 
-	function RenderComments({comments}) {
+	function RenderComments({comments, addComment, dishId}) {
 		if (comments != null) {
 			const item = comments.map((individual) => {
 				return (
@@ -13,12 +14,15 @@ import CommentForm from './CommentForm';
 			});
 
 			return (
-				<div>
-					<h4>Comments</h4>
-					<ul className="list-unstyled">
-						{item}
-					</ul>
-				</div>
+				<React.Fragment>
+					<div>
+						<h4>Comments</h4>
+						<ul className="list-unstyled">
+							{item}
+						</ul>
+					</div>
+					<CommentForm dishId={dishId} addComment={addComment} />
+				</React.Fragment>
 			);
 		}
 		else 
@@ -26,7 +30,26 @@ import CommentForm from './CommentForm';
 	}
 
 	const DishDetail = (props) => {
-		if (props.selectedDish != null) {
+		if (props.isLoading) {
+			return(
+				<div className="container">
+					<div className="row">
+						<Loading />
+					</div>
+				</div>
+			);
+		}
+		else if (props.errMess) {
+			return(
+				<div className="container">
+					<div className="row">
+						<h4>{props.errMess}</h4>
+					</div>
+				</div>
+			);
+		}
+
+		else if (props.selectedDish != null) {
 			return (
 				<div className="container">
 				<div className="row">
@@ -50,8 +73,7 @@ import CommentForm from './CommentForm';
 						</Card>
 					</div>
 					<div className="col-12 col-md-5 m-1">
-						<RenderComments comments={props.comments} />
-						<CommentForm />
+						<RenderComments comments={props.comments} addComment={props.addComment} dishId={props.selectedDish.id} />
 					</div>
 				</div>
 				</div>
