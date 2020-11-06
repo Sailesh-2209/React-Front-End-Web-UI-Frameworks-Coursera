@@ -5,7 +5,7 @@ import CommentForm from './CommentForm';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseURL';
 
-	function RenderComments({comments, addComment, dishId}) {
+	function RenderComments({comments, postComment, dishId}) {
 		if (comments != null) {
 			const item = comments.map((individual) => {
 				return (
@@ -22,7 +22,7 @@ import { baseUrl } from '../shared/baseURL';
 							{item}
 						</ul>
 					</div>
-					<CommentForm dishId={dishId} addComment={addComment} />
+					<CommentForm dishId={dishId} postComment={postComment} />
 				</React.Fragment>
 			);
 		}
@@ -74,7 +74,7 @@ import { baseUrl } from '../shared/baseURL';
 						</Card>
 					</div>
 					<div className="col-12 col-md-5 m-1">
-						<RenderComments comments={props.comments} addComment={props.addComment} dishId={props.selectedDish.id} />
+						<RenderComments comments={props.comments} postComment={props.postComment} dishId={props.selectedDish.id} />
 					</div>
 				</div>
 				</div>

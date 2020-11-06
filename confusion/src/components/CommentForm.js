@@ -20,7 +20,7 @@ class CommentForm extends Component {
 	}
 
 	handleSubmit(values) {
-		this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
+		this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
 	}
 
 	toggleModal() {
@@ -52,10 +52,10 @@ class CommentForm extends Component {
 								</Col>
 							</Row>
 							<Row>
-								<Label htmlFor="yourname" md={12}>Your Name</Label>
+								<Label htmlFor="author" md={12}>Your Name</Label>
 								<Col md={12}>
-									<Control.text model=".yourname" id="yourname" name="yourname" placeholder="Your Name" className="form-control" validators={{ required, minLength: minLength(3), maxLength: maxLength(15)}} />
-									<Errors className="text-danger" model=".yourname" show="touched" messages={{required: 'Required ', minLength: ' Must be greater than two characters', maxLength: ' Must be 15 characters or less'}} />
+									<Control.text model=".author" id="author" name="author" placeholder="Your Name" className="form-control" validators={{ required, minLength: minLength(3), maxLength: maxLength(15)}} />
+									<Errors className="text-danger" model=".author" show="touched" messages={{required: 'Required ', minLength: ' Must be greater than two characters', maxLength: ' Must be 15 characters or less'}} />
 								</Col>
 							</Row>
 							<Row className="form-group">
